@@ -1,0 +1,3 @@
+volumes/
+service/main
+*.env

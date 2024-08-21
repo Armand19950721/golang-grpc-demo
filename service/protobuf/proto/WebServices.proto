@@ -1,0 +1,92 @@
+syntax = "proto3";
+
+package WebServices;
+option go_package = "service/protos/WebServices";
+
+import "Common.proto";
+import "Echo.proto";
+import "Auth.proto";
+import "ArContent.proto";
+import "Program.proto";
+import "User.proto";
+import "Permission.proto";
+import "Statistic.proto";
+import "AccountSettings.proto";
+
+service EchoServices {
+    rpc Echo (Echo.EchoRequest) returns (Echo.EchoReply);
+    rpc EchoToken (Echo.EchoRequest) returns (Echo.EchoReply);
+    rpc EchoPermission (Echo.EchoRequest) returns (Echo.EchoReply);
+}
+
+service UserServices {
+    rpc AddUserChild (User.AddUserChildRequest) returns (Common.CommonReply);
+    rpc UpdateUserChild (User.UpdateUserChildRequest) returns (Common.CommonReply);
+    rpc GetUserChildList (User.GetUserChildListRequest) returns (User.GetUserChildListReply);
+    rpc ChangePassword (User.ChangePasswordRequest) returns (Common.CommonReply);
+    rpc ForgotPassword (User.ForgotPasswordRequest) returns (Common.CommonReply);
+    rpc DeleteUserChild (User.DeleteUserChildRequest) returns (Common.CommonReply);
+    rpc UpdateUserProgram (User.UpdateUserProgramRequest) returns (Common.CommonReply);
+    rpc GetConfirmUserChildInfo (User.GetConfirmUserChildInfoRequest) returns (User.GetConfirmUserChildInfoReply);
+    rpc ConfirmUserChild (User.ConfirmUserChildRequest) returns (Common.CommonReply);
+    rpc ResendChildInvite (User.ResendChildInviteRequest) returns (User.ResendChildInviteReply);
+    rpc CancelChildInvite (User.CancelChildInviteRequest) returns (Common.CommonReply);
+}
+
+service ProgramServices {
+    rpc CreateProgram (Program.CreateProgramRequest) returns (Program.CreateProgramReply);
+    rpc GetProgramList (Program.GetProgramListRequest) returns (Program.GetProgramListReply);
+    rpc GetFreeProgram (Program.GetFreeProgramRequest) returns (Program.GetFreeProgramReply);
+}
+
+service AuthServices {
+    rpc Login (Auth.LoginRequest) returns (Auth.AuthReply);
+    rpc Logout (Auth.LogoutRequest) returns (Common.CommonReply);
+    rpc Register (Auth.RegisterRequest) returns (Auth.RegisterReply);
+    rpc ConfirmRegisterEmail (Auth.ConfirmRegisterEmailRequest) returns (Common.CommonReply);
+    rpc ResendRegisterEmail (Auth.ResendRegisterEmailRequest) returns (Auth.ResendRegisterEmailReply);
+    rpc CheckRegisterConfirmState (Auth.CheckRegisterConfirmStateRequest) returns (Auth.CheckRegisterConfirmStateReply);
+    rpc RedeemToken (Auth.RedeemTokenRequest) returns (Auth.AuthReply);
+}
+
+service PermissionServices{
+    /// 棄用 (暫時不讓使用者客製權限 改為先準備預設權限Group)
+    // rpc GetAllPermission (Permission.GetAllPermissionRequest) returns (Permission.GetAllPermissionReply);
+    // rpc AddPermissionGroup (Permission.AddPermissionGroupRequest) returns (Common.CommonReply);
+    // rpc UpdatePermissionGroup (Permission.UpdatePermissionGroupRequest) returns (Common.CommonReply);
+    // rpc GetPermissionGroupList (Permission.GetPermissionGroupListRequest) returns (Permission.GetPermissionGroupListReply);
+
+    rpc GetPermissionGroupDefaultList (Permission.GetDefaultPermissionGroupListRequest) returns (Permission.GetDefaultPermissionGroupListReply);
+}
+
+service ArContentServices {
+    rpc GetCategoryList (ArContent.GetCategoryListRequest) returns (ArContent.GetCategoryListReply);
+    rpc GetTypeList (ArContent.GetTypeListRequest) returns (ArContent.GetTypeListReply);
+    rpc GetTemplateList (ArContent.GetTemplateListRequest) returns (ArContent.GetTemplateListReply);
+    rpc CreateArContent (ArContent.CreateArContentRequest) returns (ArContent.CreateArContentReply);
+    rpc UpdateArContentTemplate (ArContent.UpdateArContentTemplateRequest) returns (ArContent.UpdateArContentTemplateReply);
+    rpc UpdateArContentViewer (ArContent.UpdateArContentViewerRequest) returns (ArContent.UpdateArContentViewerReplay);
+    rpc GetArContentList (ArContent.GetArContentListRequest) returns (ArContent.GetArContentListReply);
+    rpc GetArContent (ArContent.GetArContentRequest) returns (ArContent.GetArContentReply);
+    rpc UpdateArContent (ArContent.UpdateArContentRequest) returns (ArContent.UpdateArContentReply);
+    rpc UpdateArContentIsOn (ArContent.UpdateArContentIsOnRequest) returns (Common.CommonReply);
+    rpc DeleteArContent(ArContent.DeleteArContentRequest) returns (Common.CommonReply);
+    rpc DuplicateArContent(ArContent.DuplicateArContentRequest) returns (ArContent.DuplicateArContentReply);
+    rpc GetArLink (ArContent.GetArLinkRequest) returns (ArContent.GetArLinkReply);
+    rpc GetViewerData (ArContent.GetViewerDataRequest) returns (ArContent.GetViewerDataReply);
+    rpc UpdateArContentThreeDModel (ArContent.UpdateArContentThreeDModelRequest) returns (Common.CommonReply);
+}
+    
+service StatisticServices{
+    rpc AddCount (Statistic.AddCountRequest) returns (Common.CommonReply);
+    rpc GetArContentDayInfoSum (Statistic.GetArContentDayInfoSumRequest) returns (Statistic.GetArContentDayInfoSumReply);
+    rpc GetArContentDropDownList (Statistic.GetArContentDropDownListRequest) returns (Statistic.GetArContentDropDownListReply);
+    rpc GetArContentDayInfo (Statistic.GetArContentDayInfoRequest) returns (Statistic.GetArContentDayInfoReply);
+}
+
+service AccountSettingsServices{
+    rpc GetBasicInfo (AccountSettings.GetBasicInfoRequest) returns  (AccountSettings.GetBasicInfoReply);
+    rpc UpdateBasicInfo (AccountSettings.UpdateBasicInfoRequest) returns (AccountSettings.UpdateBasicInfoReply);
+    rpc GetLoginInfo (AccountSettings.GetLoginInfoRequest) returns (AccountSettings.GetLoginInfoReply);
+    rpc UpdateLoginInfo (AccountSettings.UpdateLoginInfoRequest) returns (AccountSettings.UpdateLoginInfoReply);
+}

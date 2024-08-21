@@ -1,0 +1,201 @@
+syntax="proto3";
+
+package ArContent;
+option go_package = "service/protos/ArContent";
+
+import "Common.proto";
+
+message GetArContentListRequest {
+  Common.PageInfoRequest pageInfo = 1;
+  string keyword = 2;
+}
+
+message GetArContentListReply { 
+  Common.PageInfoReply pageInfo = 1;
+  repeated ArContentInfo data = 2; 
+}
+
+message GetCategoryListRequest {
+}
+
+message GetCategoryListReply {
+  repeated ArContentCategoryEnum category_enum = 1;
+}
+
+message GetTypeListRequest {
+  ArContentCategoryEnum category_enum = 1;
+}
+
+message GetTypeListReply {
+  repeated ArContentTypeEnum type_enum = 1;
+}
+
+message GetTemplateListRequest {
+  ArContentCategoryEnum category_enum = 1;
+  ArContentTypeEnum type_enum = 2;
+}
+
+message GetTemplateListReply {
+  repeated ArContentTemplateEnum template_enum = 1;
+}
+
+message CreateArContentRequest {
+  string name = 1;
+  string tag = 2;
+  string upload_thumbnail_name = 3;
+  ArContentCategoryEnum category_enum = 4;
+  ArContentTypeEnum type_enum = 5;
+  ArContentTemplateEnum template_enum = 6;
+}
+
+message CreateArContentReply {
+  ArContentInfo data = 1;
+}
+
+message UpdateArContentThreeDModelRequest {
+  string ar_content_id = 1;
+  string uploaded_three_d_model_filename = 2;
+}
+
+message UpdateArContentTemplateRequest {
+  string ar_content_id = 1;
+  bytes template_data = 2;
+}
+
+message UpdateArContentTemplateReply {
+  ArContentInfo data = 1;
+}
+
+message UpdateArContentViewerRequest {
+  string ar_content_id = 1;
+  ArViewerSetting viewer_setting = 2;
+}
+
+message UpdateArContentViewerReplay {
+  ArContentInfo data = 1;
+}
+
+message GetArContentRequest {
+  string ar_content_id = 1;
+}
+
+message GetArContentReply {
+  ArContentInfo data = 1;
+}
+
+message UpdateArContentRequest {
+  string ar_content_id = 1;
+  string name = 2;
+  string tag = 3;
+  optional string upload_thumbnail_name = 4;
+}
+
+message UpdateArContentReply {
+  ArContentInfo data = 1;
+}
+
+message UpdateArContentIsOnRequest {
+  string ar_content_id = 1;
+  optional bool is_on = 2;
+}
+
+message DeleteArContentRequest {
+  string ar_content_id = 1;
+}
+
+message DuplicateArContentRequest {
+  string ar_content_id = 1;
+}
+
+message DuplicateArContentReply {
+  ArContentInfo data = 1;
+}
+
+message ArContentInfo {
+  string ar_content_id = 1;
+  string name = 2;
+  string tag = 3;
+  optional bool is_on = 4;
+  ArContentCategoryEnum category_enum = 5;
+  ArContentTypeEnum type_enum = 6;
+  ArContentTemplateEnum template_enum = 7;
+  bytes template_setting = 8;
+  ArViewerSetting viewer_setting = 9;
+  string thumbnail_path = 10;
+  string thumbnail_name = 11; 
+  string create_time = 12;
+  string update_time = 13;
+}
+
+message ArViewerSetting {
+  string logo_image_path = 1;
+  string logo_image_name = 2;
+  string logo_url = 3;
+  string border_color = 4;
+  string camera_button_color = 5;
+  optional bool allow_capture = 6;
+  string upload_logo_image_name = 7;
+  LinkButton viewer_right_button = 8; 
+  LinkButton viewer_left_button = 9;
+}
+
+message LinkButton {
+  optional bool enable = 1;
+  string btn_text = 2;
+  string btn_color = 3;
+  string text_color = 4;
+  string url = 5;
+}
+
+message GetArLinkRequest {
+  string ar_content_id = 1;
+}
+
+message GetArLinkReply {
+  string ar_content_viewer_path = 1;
+}
+
+message GetViewerDataRequest {
+  string ar_content_viewer_url_id = 1;
+}
+
+message GetViewerDataReply {
+  ArContentInfo data = 1;
+  string admin_id = 2;
+}
+
+enum ArContentCollet {
+  CATEGORY = 0;
+  TYPE = 1;
+  TEMPLATE = 2;
+}
+
+enum ArContentCategoryEnum {
+  CATRGORY_ALL = 0; 
+  CATRGORY_HEAD = 1;
+  CATRGORY_FACE = 2;
+}
+
+enum ArContentTypeEnum {
+  TYPE_ALL = 0;
+  TYPE_EAR  = 1;
+  TYPE_HAIR = 2;
+  TYPE_GLASSES = 3;
+  TYPE_LENS = 4;
+}
+
+enum ArContentTemplateEnum {
+  TEMPLATE_ALL = 0;
+  TEMPLATE_EARRING  = 1;
+  TEMPLATE_GLASSES = 2;
+  TEMPLATE_CONTECT_LENSES =3;
+  TEMPLATE_HAIR = 4;
+}
+
+enum ArContentImageType {
+  TEMP = 0;
+  THUMBNAIL = 1;
+  TEMPLATE_IMAGE = 2;
+  VIEWER_IMAGE = 3;
+  STATIC_IMAGE = 4;
+}

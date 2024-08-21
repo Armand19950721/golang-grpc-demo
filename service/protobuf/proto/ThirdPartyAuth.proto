@@ -1,0 +1,18 @@
+syntax="proto3";
+
+package ThirdPartyAuth;
+option go_package = "service/protos/ThirdPartyAuth";
+import "ThirdPartyCommon.proto";
+
+message VerificationRequest {
+  string grant_type = 1;    
+  string client_id = 2;     
+  string client_secret = 3; 
+}
+
+message VerificationReply {
+  string access_token = 1;
+  string token_type = 2;
+  int64 expires_in = 3;
+  ThirdPartyCommon.StatusCode state = 4;
+}

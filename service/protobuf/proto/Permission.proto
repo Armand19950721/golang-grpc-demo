@@ -1,0 +1,56 @@
+syntax="proto3";
+
+package Permission;
+option go_package = "service/protos/Permission";
+
+
+message PermissionPackage {
+  string name = 1;
+  string services_name = 2;
+  repeated PermissionModel permission_models = 3;
+}
+
+message PermissionModel {
+  string id = 1;
+  string name = 2;
+  string rpc_name = 3;
+}
+
+/// 棄用 (暫時不讓使用者客製權限 改為先準備預設權限Group) start
+
+// message GetAllPermissionRequest {
+// }
+
+// message GetAllPermissionReply {
+//   repeated PermissionPackage models = 1;
+// }
+
+// message AddPermissionGroupRequest {
+//   PermissionGroupModel model = 1;
+// }
+
+// message GetPermissionGroupListRequest {
+// }
+
+// message GetPermissionGroupListReply {
+//   repeated PermissionGroupModel models = 1;
+// }
+
+// message UpdatePermissionGroupRequest {
+//   PermissionGroupModel model = 1;
+// }
+
+/// 棄用 (暫時不讓使用者客製權限 改為先準備預設權限Group) end
+
+message GetDefaultPermissionGroupListRequest {
+}
+
+message GetDefaultPermissionGroupListReply {
+  repeated PermissionGroupModel models = 1;
+}
+
+message PermissionGroupModel {
+  string permission_group_id = 1; // update 
+  string permission_group_name = 2;
+  repeated string permission_seleted_ids = 3; 
+}

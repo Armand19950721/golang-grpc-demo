@@ -1,0 +1,75 @@
+syntax="proto3";
+
+package User;
+option go_package = "service/protos/User";
+import "Common.proto";
+
+message AddUserChildRequest {
+  UserChildModel model = 1;
+}
+
+message GetConfirmUserChildInfoRequest {
+  string url_key = 1;
+}
+
+message GetConfirmUserChildInfoReply {
+  string account = 1;
+}
+
+message ConfirmUserChildRequest {
+  string url_key = 1;
+  string password = 2;
+}
+
+message ResendChildInviteRequest {
+  string user_id = 1;
+}
+
+message ResendChildInviteReply {
+  string url_key = 1; // for test
+}
+
+message CancelChildInviteRequest {
+  string user_id = 1;
+}
+
+message UpdateUserChildRequest {
+  UserChildModel model = 1;
+}
+
+message GetUserChildListRequest {
+  Common.PageInfoRequest pageInfo = 1;
+}
+
+message GetUserChildListReply {
+  repeated UserChildModel models = 1;
+  Common.PageInfoReply pageInfo = 2;
+}
+
+message DeleteUserChildRequest {
+  UserChildModel model = 1;
+}
+
+message UserChildModel {
+  string user_id = 1;  // update
+  string email = 2; // add
+  string password = 3; // confirm 
+  string name = 4; // add, update 
+  string permission_group_id = 5; // add, update 
+  Common.MailState mail_state = 6; // list
+  string mail_expire_date = 7; // list
+}
+
+message ChangePasswordRequest {
+  string old_password = 1;
+  string new_password = 2;
+}
+
+message ForgotPasswordRequest {
+  string email = 1;
+}
+
+message UpdateUserProgramRequest {
+  string program_id = 1;
+}
+

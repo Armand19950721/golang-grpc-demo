@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package ThirdPartyWebServices;
+option go_package = "service/protos/ThirdPartyWebServices";
+
+import "ThirdPartyAuth.proto";
+import "ThirdPartyArContent.proto";
+
+service ThirdPartyArContentServices {
+    rpc CreateArContent (ThirdPartyArContent.CreateArContentRequest) returns (ThirdPartyArContent.CreateArContentReply);
+    rpc GetArLink (ThirdPartyArContent.GetArLinkRequest) returns (ThirdPartyArContent.GetArLinkReply);
+}
+
+service ThirdPartyAuthServices {
+    rpc Verification (ThirdPartyAuth.VerificationRequest) returns (ThirdPartyAuth.VerificationReply);
+}

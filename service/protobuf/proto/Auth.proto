@@ -1,0 +1,94 @@
+syntax="proto3";
+
+package Auth;
+option go_package = "service/protos/Auth";
+import "Common.proto";
+
+message LoginRequest {
+  string email = 1;
+  string password = 2;
+}
+
+message AuthReply {
+  string user_id = 1;
+  string token = 2;
+  string expire_date = 3;
+  Common.ErrorCodes code = 4;
+}
+
+message LogoutRequest {
+}
+
+message RegisterRequest {
+  string email = 1;
+  string phone_number = 2;
+  string name = 3;
+  string password = 4;
+  string programId = 5;
+}
+
+message RegisterReply {
+  string url_key = 1; // for test
+  string user_id = 2;
+}
+
+message ConfirmRegisterEmailRequest {
+  string url_key = 1; 
+}
+
+// AuthReply
+
+message ResendRegisterEmailRequest {
+  string user_id = 1;
+}
+
+message ResendRegisterEmailReply {
+  string url_key = 1; // for test
+}
+
+message CheckRegisterConfirmStateRequest {
+  string user_id = 1;
+}
+
+message CheckRegisterConfirmStateReply {
+  Common.MailState mail_state = 1;
+}
+
+message RedeemTokenRequest {
+  string user_id = 1;
+  string mail_state_id = 2;
+}
+
+// message GetAllAuthRequest {
+// }
+
+// message GetAllAuthReply {
+//   repeated AuthModel models = 1;
+// }
+
+// message AuthModel {
+//   string id = 1;
+//   string name = 2;
+// }
+
+// message AddAuthGroupRequest {
+//   AuthGroupModel model = 1;
+// }
+
+// message GetAuthGroupListRequest {
+// }
+
+// message GetAuthGroupListReply {
+//   repeated AuthGroupModel models = 1;
+// }
+
+// message UpdateAuthGroupRequest {
+//   AuthGroupModel model = 1;
+// }
+
+// message AuthGroupModel {
+//   string auth_group_id = 1;
+//   string auth_group_name = 2;
+//   string auth_list = 3;
+// }
+

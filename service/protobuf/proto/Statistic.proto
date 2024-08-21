@@ -1,0 +1,57 @@
+syntax="proto3";
+
+package Statistic;
+option go_package = "service/protos/Statistic";
+
+enum StatisticType {
+    STATISTIC_TYPE_NONE = 0;
+    VIEWER_OPEN = 1;
+    VIEWER_INITED = 2;
+    VIEWER_TAKE_PICTURE = 3;
+    CLICK_VIEWER_RIGHT_BUTTEN = 4;
+    CLICK_VIEWER_LEFT_BUTTEN = 5;
+}
+
+message AddCountRequest {
+    string ar_content_id = 1;
+    string admin_id = 2;
+    StatisticType type = 3;
+}
+
+message GetArContentDayInfoSumRequest {
+    string datetime_start = 1;
+    string datetime_end = 2;
+    StatisticType type = 3;
+}
+
+message GetArContentDayInfoSumReply {
+    repeated DayInfoModel data = 1;
+}
+
+message GetArContentDropDownListRequest {
+}
+
+message GetArContentDropDownListReply {
+    repeated ArContentDropDownList data = 1;
+}
+
+message GetArContentDayInfoRequest {
+    string datetime_start = 1;
+    string datetime_end = 2;
+    StatisticType type = 3;
+    string ar_content_id = 4;
+}
+
+message GetArContentDayInfoReply {
+    repeated DayInfoModel data = 1;
+}
+
+message ArContentDropDownList {
+    string ar_content_id = 1;
+    string name = 2;
+}
+
+message DayInfoModel {
+    string datetime = 1;
+    int32 count = 2;
+}

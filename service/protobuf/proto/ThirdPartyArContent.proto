@@ -1,0 +1,29 @@
+syntax="proto3";
+
+package ThirdPartyArContent;
+option go_package = "service/protos/ThirdPartyArContent";
+import "ThirdPartyCommon.proto";
+
+message CreateArContentRequest {
+  string name = 1;
+  ArContentTemplateType template_type = 2;
+}
+
+message CreateArContentReply {
+  string ar_content_id = 1;
+  ThirdPartyCommon.StatusCode state = 2;
+}
+
+message GetArLinkRequest {
+  string ar_content_id = 1;
+}
+
+message GetArLinkReply {
+  string ar_content_viewer_path = 1;
+  ThirdPartyCommon.StatusCode state = 2;
+}
+
+enum ArContentTemplateType {
+    TEMPLATE_GLASSES = 0;
+    TEMPLATE_EARRING = 1;
+}

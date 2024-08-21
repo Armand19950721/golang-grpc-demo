@@ -1,0 +1,17 @@
+syntax="proto3";
+
+package ThirdPartyCommon;
+option go_package = "service/protos/ThirdPartyCommon";
+
+enum StatusCode {
+  StatusCode_NONE = 0;
+
+  // Auth
+  SUCCESS = 10000;
+  AUTH_ERROR = 10002;
+  INVAILD_TOKEN = 10001;
+
+  // API
+  INVAILD_PARAM_ERROR = 20001;
+  INTERNAL_ERROR = 20002;
+}

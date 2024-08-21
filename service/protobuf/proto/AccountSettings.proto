@@ -1,0 +1,44 @@
+syntax="proto3";
+
+package AccountSettings;
+option go_package = "service/protos/AccountSettings";
+
+message GetBasicInfoRequest {
+} 
+
+message GetBasicInfoReply {
+  BasicInfoModel model = 1;
+}
+
+message UpdateBasicInfoRequest {
+  BasicInfoModel model = 1;
+}
+
+message UpdateBasicInfoReply {
+}
+
+message BasicInfoModel {
+  string first_name = 1;
+  string last_name = 2;
+  string company_name = 3;
+  string gui_number = 4;
+}
+
+message GetLoginInfoRequest {
+}
+
+message GetLoginInfoReply {
+  LoginInfoModel model = 1;
+}
+
+message UpdateLoginInfoRequest {
+  LoginInfoModel model = 1;
+}
+
+message UpdateLoginInfoReply {
+}
+
+message LoginInfoModel {
+  string account_name = 1;
+  string email_addres = 2; // get
+}

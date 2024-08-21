@@ -1,0 +1,42 @@
+syntax="proto3";
+
+package Program;
+option go_package = "service/protos/Program";
+
+import "Common.proto";
+import "ArContent.proto";
+
+message CreateProgramRequest {
+  ProgramModel model = 1;
+}
+
+message CreateProgramReply {
+  string program_id = 1;
+}
+
+message GetProgramListRequest {
+}
+
+message GetProgramListReply {
+  repeated ProgramModel models = 1;
+}
+
+message GetFreeProgramRequest {
+}
+
+message GetFreeProgramReply {
+  string program_id = 1;
+}
+
+message ProgramModel {
+  string id = 1;
+  string name = 2;
+  Common.ProgramState state = 3;
+  int32 seats = 4;
+  repeated ArContent.ArContentCategoryEnum categories = 5;
+  repeated ArContent.ArContentTypeEnum types = 6;
+  repeated ArContent.ArContentTemplateEnum templates = 7;
+  repeated Common.EffectTool effect_tools = 8;
+  repeated Common.ArInteractModule ar_interact_modules = 9;
+  repeated Common.ArEditWindowModule ar_edit_window_modules = 10;
+}

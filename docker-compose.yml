@@ -1,0 +1,72 @@
+version: '3'
+networks:
+  backend:
+    driver: bridge
+
+services:
+  envoy:
+    build:
+      context: ./dockers/envoy
+    restart: always
+    ports:
+      - 20001:20001
+      - 20002:20002
+    networks:
+      - backend
+    logging:  
+      driver: "json-file"
+      options:
+        max-file: "3"
+        max-size: "10m"
+    depends_on:
+      - grpc
+  ###############################
+  gin:
+    build:
+      context: ./service
+    restart: always
+    ports:
+      - 8080:8080
+    command: ./main gin
+    networks:
+      - backend
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "3"
+        max-size: "10m"
+    depends_on:
+      - grpc
+  ###############################
+  grpc:
+    build:
+      context: ./service
+    restart: always
+    ports:
+      - 20000:20000
+    command: ./main grpc
+    networks:
+      - backend
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "3"
+        max-size: "10m"
+    depends_on:
+      - redis
+  ################################
+  redis:
+    image: redis:6.2-alpine
+    restart: always
+    ports:
+      - 6379:6379
+    command: redis-server --save 20 1 --loglevel warning --requirepass ${REDIS_PWD} --maxmemory 1000000000
+    volumes:
+      - ./volumes/redis:/data
+    networks:
+      - backend
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "3"
+        max-size: "10m"

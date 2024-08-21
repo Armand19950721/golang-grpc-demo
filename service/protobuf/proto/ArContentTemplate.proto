@@ -1,0 +1,74 @@
+syntax="proto3";
+
+package ArContentTemplate;
+option go_package = "service/protos/ArContentTemplate";
+
+import "Common.proto";
+
+message ObjectSetting {
+  string image_path = 1;
+  string image_name = 2;
+  Common.Vector position = 3;
+  Common.Vector rotation = 4;
+  Common.Vector scale = 5;
+  string image_upload_name = 6;
+}
+
+message TemplateEarring {
+  EarringSettingSide left = 1;
+  EarringSettingSide right = 2;
+}
+
+message EarringSettingSide {
+  repeated EarringSetting settings = 1;
+  Common.Vector over_all_position = 2;
+  Common.Vector over_all_rotation = 3;
+  Common.Vector over_all_scale = 4;
+}
+
+message EarringSetting {
+  ObjectSetting setting = 1;
+  EarringObjectLocationEnum location = 2;
+}
+
+enum EarringObjectLocationEnum {
+  EARRING_NONE = 0;
+  EARRING_FIRST = 1;
+  EARRING_SECOND = 2;
+  EARRING_THIRD = 3;
+}
+
+message TemplateGlasses {
+  repeated GlassesSetting settings = 1;
+  Common.Vector over_all_position = 2;
+  Common.Vector over_all_rotation = 3;
+  Common.Vector over_all_scale = 4;
+}
+
+message GlassesSetting {
+  ObjectSetting setting = 1;
+  GlassesObjectLocationEnum location = 2;
+}
+
+enum GlassesObjectLocationEnum {
+  GLASSES_NONE = 0;
+  GLASSES_RIGHT = 1;
+  GLASSES_FRONT = 2;
+  GLASSES_LEFT = 3;
+}
+
+message TemplateContactLenses {
+  string image_path = 1;
+  string image_name = 2;
+  string color_code = 3;
+  Common.Transform left = 4;
+  Common.Transform right = 5;
+  string radius = 6;
+  optional string image_upload_name = 7;
+}
+
+message TemplateHair { 
+  string color_code = 1;
+  string alpha_softness = 2;
+  string alpha_feather = 3;
+}
